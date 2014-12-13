@@ -7,3 +7,16 @@
 	max-height: 20rem;
 	overflow: hidden;
 }
+
+.thought h2 {
+	display: inline;
+}
+
+.thought .tags {
+	float: right;
+	margin: auto auto 0 auto;
+}
+
+.thought .tags :not(:last-child)::after {
+	content: ", ";
+}
