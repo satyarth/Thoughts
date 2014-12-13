@@ -1,0 +1,12 @@
+$def with (thought)
+
+$var title: $thought.title
+
+<div class="thought">
+	<h2>$thought.title</h2>
+	<div class="tags">
+		$for tag in thought.tags:
+			<span><a href="/tag/$tag">$tag</a></span>
+	</div>
+	<div class="contents">$:thought.marked_contents</div>
+</div>

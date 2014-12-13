@@ -86,7 +86,7 @@ class ThoughtServer:
         if thought is None:
             raise web.notfound()
 
-        return markdown.markdown(thought)
+        return renderpage.thought(thought)
 		
 class TagServer:
 	def GET(self, tag):
