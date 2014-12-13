@@ -1,0 +1,8 @@
+$def with (tag, thoughts)
+
+$var title: Thoughts tagged '$tag'
+
+<h1>Thoughts tagged '$tag'</h1>
+
+$for thought in thoughts:
+    $:thought

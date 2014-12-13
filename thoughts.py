@@ -10,7 +10,8 @@ templates_path = base_path + "templates/"
 
 urls = (
     '/', 'HomeServer',
-    '/(.*)', 'ThoughtServer'
+	'/tag/(.*)', 'TagServer',
+    '/(.*)', 'ThoughtServer',
 )
 
 app = web.application(urls, globals(), autoreload=False)
@@ -26,8 +27,11 @@ def thoughts_all():
     for filename in os.listdir(thoughts_path):
         if    has_suffix(filename, ".md") \
            or has_suffix(filename, ".markdown"):
-            yield filename
+            yield thought_get(filename)
 
+def thoughts_by_tag(tag):
+	return filter(lambda thought: tag in thought.tags, thoughts_all())
+			
 def thought_get(name):
     filenames = [thoughts_path + name,
                  thoughts_path + name + ".md",
@@ -72,7 +76,7 @@ class Thought:
 	
 class HomeServer:
     def GET(self):
-        thoughts = [render.inlinethought(thought_get(name)) for name in thoughts_all()]
+        thoughts = [render.inlinethought(thought) for thought in thoughts_all()]
         return renderpage.home(thoughts)
 
 class ThoughtServer:
@@ -83,6 +87,11 @@ class ThoughtServer:
             raise web.notfound()
 
         return markdown.markdown(thought)
-
+		
+class TagServer:
+	def GET(self, tag):
+		thoughts = [render.inlinethought(thought) for thought in thoughts_by_tag(tag)]
+		return renderpage.tag(tag, thoughts)
+		
 if __name__ == "__main__":
     app.run()
