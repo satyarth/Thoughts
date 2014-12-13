@@ -52,6 +52,8 @@ class Thought:
 		self.title = ""
 		self.tags = []
 		self.contents = str
+		#Remove extension
+		self.name = name[:name.rfind(".")]
 		
 		str_split = str.split("\n", 1)
 		
