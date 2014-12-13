@@ -16,7 +16,7 @@ app = web.application(urls, globals(), autoreload=False)
 application = app.wsgifunc()
 
 render = web.template.render(templates_path)
-renderpage = web.template.render(templates_path)
+renderpage = web.template.render(templates_path, base="index")
 
 def has_suffix(str, suffix):
     return str[-len(suffix):] == suffix
