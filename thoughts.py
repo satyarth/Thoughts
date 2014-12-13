@@ -67,7 +67,7 @@ class Thought:
 		str_split = str.split("\n", 1)
 		
 		#Doesn't have a metadata / empty file
-		if str[0] != "{" or len(str_split) == 1:
+		if str == "" or str[0] != "{" or len(str_split) == 1:
 			pass
 		
 		else:
