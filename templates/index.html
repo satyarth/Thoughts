@@ -3,8 +3,9 @@ $def with (content)
 <html>
 <head>
 	<title>$content.title</title>
+	<link href="static/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-$:content
+	<div class="page-container">$:content</div>
 </body>
 </html>

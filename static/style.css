@@ -1,0 +1,9 @@
+.page-container {
+	max-width: 800px;
+	margin: 0 auto;
+}
+
+.inline.thought {
+	max-height: 20rem;
+	overflow: hidden;
+}
