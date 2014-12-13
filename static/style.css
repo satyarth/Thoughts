@@ -26,6 +26,11 @@ body {
 	list-style: none;
 }
 
+.navbar li.right {
+	float: right;
+	padding: 0 0 0 2rem;
+}
+
 .inline.thought .contents {
 	max-height: 20rem;
 	overflow: hidden;

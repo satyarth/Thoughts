@@ -8,6 +8,8 @@ base_path = "./"
 thoughts_path = base_path + "thoughts/"
 templates_path = base_path + "templates/"
 
+template_globals = {"socials": []}
+
 urls = (
     '/', 'HomeServer',
 	'/tag/(.*)', 'TagServer',
@@ -22,8 +24,8 @@ app.notfound = notfound
 
 application = app.wsgifunc()
 
-render = web.template.render(templates_path)
-renderpage = web.template.render(templates_path, base="index")
+render = web.template.render(templates_path, globals=template_globals)
+renderpage = web.template.render(templates_path, globals=template_globals, base="index")
 
 def has_suffix(str, suffix):
     return str[-len(suffix):] == suffix
@@ -80,6 +82,11 @@ class Thought:
 				pass
 					
 		self.marked_contents = markdown.markdown(self.contents)
+	
+class Social:
+	def __init__(self, label, link):
+		self.label = label
+		self.link = link
 	
 class HomeServer:
     def GET(self):
