@@ -9,7 +9,7 @@ templates_path = base_path + "templates/"
 
 urls = (
     '/', 'Home',
-    '/(.*)', 'Thoughts',
+    '/(.*)', 'Thought',
 )
 
 app = web.application(urls, globals(), autoreload=False)
@@ -47,7 +47,7 @@ class Home:
         return renderpage.home([render.inlinethought(thoughtname, thought_get(thoughtname))
                                 for thoughtname in thoughts_all()])
 
-class Thoughts:
+class Thought:
     def GET(self, name):
         thought = thought_get(name)
 
