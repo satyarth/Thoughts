@@ -14,7 +14,12 @@ urls = (
     '/(.*)', 'ThoughtServer',
 )
 
+def notfound():
+    return renderpage.notfound()
+
 app = web.application(urls, globals(), autoreload=False)
+app.notfound = notfound
+
 application = app.wsgifunc()
 
 render = web.template.render(templates_path)
@@ -86,7 +91,7 @@ class ThoughtServer:
         thought = thought_get(name)
 
         if thought is None:
-            raise web.notfound()
+            return web.notfound()
 
         return renderpage.thought(thought)
 		
