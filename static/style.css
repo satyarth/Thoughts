@@ -3,7 +3,7 @@
 	margin: 0 auto;
 }
 
-.inline.thought {
+.inline.thought .contents {
 	max-height: 20rem;
 	overflow: hidden;
 }

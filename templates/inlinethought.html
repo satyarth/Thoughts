@@ -1,4 +1,10 @@
-$def with (title, contents)
+$def with (thought)
 
-<h2>$title</h2>
-<div class="inline thought">$:contents</div>
+<div class="inline thought">
+	<h2>$thought.title</h2>
+	<div class="tags">
+		$for tag in thought.tags:
+			$tag
+	</div>
+	<div class="contents">$:thought.marked_contents</div>
+</div>

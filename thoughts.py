@@ -1,5 +1,6 @@
 import web
 import markdown
+import simplejson
 
 import os
 
@@ -8,8 +9,8 @@ thoughts_path = base_path + "thoughts/"
 templates_path = base_path + "templates/"
 
 urls = (
-    '/', 'Home',
-    '/(.*)', 'Thought',
+    '/', 'HomeServer',
+    '/(.*)', 'ThoughtServer'
 )
 
 app = web.application(urls, globals(), autoreload=False)
@@ -35,22 +36,46 @@ def thought_get(name):
     for filename in filenames:
         try:
             with open(filename) as file:
-                return file.read()
+                return Thought(name, file.read())
 
         except IOError:
             pass
 
     return None
 
-def render_inlinethought(thoughtname):
-        return render.inlinethought(thoughtname, markdown.markdown(thought_get(thoughtname)))
+class Thought:
+	def __init__(self, name, str):
+		self.title = ""
+		self.tags = []
+		self.contents = str
+		
+		str_split = str.split("\n", 1)
+		
+		#Doesn't have a metadata / empty file
+		if str[0] != "{" or len(str_split) == 1:
+			pass
+		
+		else:
+			try:
+				metadata = simplejson.loads(str_split[0])
+				self.contents = str_split[1]
+				
+				#Import the relevant keys from the metadata into self
+				for key in ["title", "tags"]:
+					if key in metadata:
+						setattr(self, key, metadata[key])
+						
+			except simplejson.decoder.JSONDecodeError:
+				pass
+					
+		self.marked_contents = markdown.markdown(self.contents)
 	
-class Home:
+class HomeServer:
     def GET(self):
-        thoughts = [render_inlinethought(thoughtname) for thoughtname in thoughts_all()]
+        thoughts = [render.inlinethought(thought_get(name)) for name in thoughts_all()]
         return renderpage.home(thoughts)
 
-class Thought:
+class ThoughtServer:
     def GET(self, name):
         thought = thought_get(name)
 
