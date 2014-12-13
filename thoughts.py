@@ -13,6 +13,7 @@ template_globals = {"socials": []}
 urls = (
     '/', 'HomeServer',
 	'/taglist', 'TagListServer',
+	'/archive', 'ArchiveServer',
 	'/tag/(.*)', 'TagServer',
     '/(.*)', 'ThoughtServer',
 )
@@ -124,6 +125,13 @@ class TagServer:
 class TagListServer:
 	def GET(self):
 		return renderpage.taglist(tags_all())
+		
+class ArchiveServer:
+	def GET(self):
+		return renderpage.archive(thoughts_all())
+		
+template_globals["socials"] += [Social("github", "http://www.github.com/Fedjmike"),
+								Social("twitter", "http://www.twitter.com/Fedjmike")]
 		
 if __name__ == "__main__":
     app.run()
