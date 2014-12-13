@@ -1,3 +1,7 @@
+body {
+	font-family: 'Merriweather', serif;
+}
+
 .page-container {
 	max-width: 800px;
 	margin: 0 auto;
