@@ -42,10 +42,13 @@ def thought_get(name):
 
     return None
 
+def render_inlinethought(thoughtname):
+        return render.inlinethought(thoughtname, markdown.markdown(thought_get(thoughtname)))
+	
 class Home:
     def GET(self):
-        return renderpage.home([render.inlinethought(thoughtname, thought_get(thoughtname))
-                                for thoughtname in thoughts_all()])
+        thoughts = [render_inlinethought(thoughtname) for thoughtname in thoughts_all()]
+        return renderpage.home(thoughts)
 
 class Thought:
     def GET(self, name):
