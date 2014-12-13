@@ -1,0 +1,13 @@
+$def with (tags)
+
+$var title: Tag List
+
+<h1>Tag List</h1>
+
+$for tag, freq in tags.iteritems():
+	<a href="/tag/$tag">$tag</a>: $freq \
+		$if freq == 1:
+			thought
+		$else:
+			thoughts
+	<br/>

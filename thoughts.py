@@ -12,6 +12,7 @@ template_globals = {"socials": []}
 
 urls = (
     '/', 'HomeServer',
+	'/taglist', 'TagListServer',
 	'/tag/(.*)', 'TagServer',
     '/(.*)', 'ThoughtServer',
 )
@@ -83,6 +84,19 @@ class Thought:
 					
 		self.marked_contents = markdown.markdown(self.contents)
 	
+def tags_all():
+	tags = {}
+	
+	for thought in thoughts_all():
+		for tag in thought.tags:
+			if tag in tags:
+				tags[tag] += 1
+				
+			else:
+				tags[tag] = 1
+	
+	return tags
+	
 class Social:
 	def __init__(self, label, link):
 		self.label = label
@@ -106,6 +120,10 @@ class TagServer:
 	def GET(self, tag):
 		thoughts = [render.inlinethought(thought) for thought in thoughts_by_tag(tag)]
 		return renderpage.tag(tag, thoughts)
+
+class TagListServer:
+	def GET(self):
+		return renderpage.taglist(tags_all())
 		
 if __name__ == "__main__":
     app.run()
