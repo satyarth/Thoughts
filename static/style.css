@@ -2,18 +2,37 @@ body {
 	font-family: 'Merriweather', serif;
 }
 
+.thought h2, a {
+	color: rgb(85, 26, 139)
+}
+
 .page-container {
 	max-width: 800px;
 	margin: 0 auto;
+	margin-bottom: 10rem;
 }
 
 .navbar {
+	display: block;
 	margin-bottom: 2rem;
+	
+	border-top: solid 1.2rem rgb(85, 26, 139);
+	padding: 0.2rem 0.4rem;
+}
+
+.navbar li {
+	display: inline;
+	padding-right: 2rem;
+	list-style: none;
 }
 
 .inline.thought .contents {
 	max-height: 20rem;
 	overflow: hidden;
+}
+
+.inline.thought {
+	margin-bottom: 3rem;
 }
 
 .thought h2 {
