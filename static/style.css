@@ -29,13 +29,36 @@ article ul {
 	padding: 0;
 }
 
+article ul li {
+	padding-left: 1.3rem;
+}
+
 article ul li:before {
-    content: "- ";
+    content: "-";
+	margin-left: -1.2rem;
+	margin-right: 0.5rem;
     color: rgb(85, 26, 139)
 }
 
 article ul ul {
-	margin-left: 1rem;
+	margin-left: -0.2rem;
+	margin-bottom: 0.3rem;
+}
+
+article dt {
+	display: inline-block;
+	float: left;
+	clear: left;
+	margin-right: 0.5rem;
+	font-weight: bold;
+}
+
+article dt:after {
+	content: ':'
+}
+
+article dd {
+	margin-bottom: 0.5rem;
 }
 
 article code {
@@ -43,13 +66,34 @@ article code {
 }
 
 article pre {
-	margin-left: 1rem;
+	margin-left: 2rem;
 }
 
 article :not(pre) > code {
 	padding: 0 0.2rem;
 	background-color: rgba(85, 26, 139, 0.05);
 	white-space: nowrap;
+}
+
+.code .k, .code .kt, .code .s {
+	color: #0000FF;
+}
+
+.code .p, .code .o {
+	color: #008040;
+}
+
+.code .mi {
+	color: #F000F0;
+}
+
+.code .cm {
+	color: #FF8000;
+}
+
+blockquote {
+	margin-left: 2rem;
+	font-style: italic;
 }
 
 /*Layout*/

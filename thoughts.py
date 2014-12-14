@@ -83,7 +83,9 @@ class Thought:
 			except simplejson.decoder.JSONDecodeError:
 				pass
 					
-		self.marked_contents = markdown.markdown(self.contents)
+		self.marked_contents = markdown.markdown(self.contents,
+												 extensions=["markdown.extensions.codehilite", "markdown.extensions.def_list"],
+												 extension_configs={"markdown.extensions.codehilite": {"css_class": "code"}})
 	
 def tags_all():
 	tags = {}
