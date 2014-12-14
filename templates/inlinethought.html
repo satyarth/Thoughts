@@ -4,10 +4,10 @@ $def with (thought)
 	<header>
 		<h1 class="title"><a href="/$thought.name">$thought.title</a></h1>
 		<div class="tags">
-			$ n = len(thought.tags)
+			$ n = 999
 			
-			$if n > 4:
-				$if n % 3 == 2:
+			$if len(thought.tags) > 4:
+				$if len(thought.tags) % 3 == 2:
 					$ n = 3
 					
 				$else:
