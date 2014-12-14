@@ -8,8 +8,14 @@ body {
 	font-family: 'Merriweather', serif;
 }
 
-.thought h1, .thought h2, .thought h3, a {
+.thought h1, a {
 	color: rgb(85, 26, 139)
+}
+
+.thought h2, .thought h3 {
+	padding: 0.25rem 0.5rem 0.1rem 0.5rem;
+	background-color: rgb(85, 26, 139);
+	color: #FFFFFF;
 }
 
 h1, h2, h3 {
