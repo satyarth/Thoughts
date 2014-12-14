@@ -1,23 +1,58 @@
+* {
+	margin: 0;
+}
+
+/**/
+
 body {
 	font-family: 'Merriweather', serif;
 }
 
-.thought h2, a {
+.thought h1, .thought h2, .thought h3, a {
 	color: rgb(85, 26, 139)
 }
 
-.page-container {
+h1, h2, h3 {
+	margin: 1.5rem 0;
+}
+
+p {
+	margin: 1rem 0;
+}
+
+h1:first-child, h2:first-child, h3:first-child, p:first-child {
+	margin-top: 0;
+}
+
+/*Layout*/
+
+.page {
 	max-width: 800px;
 	margin: 0 auto;
-	margin-bottom: 10rem;
 }
 
 .navbar {
+	position: fixed;
 	display: block;
-	margin-bottom: 2rem;
+	width: 100%;
+	max-width: 800px;
+}
+
+.page .content {
+	padding-top: 5rem;
+	padding-bottom: 10rem;
+}
+
+/*Navbar*/
 	
-	border-top: solid 1.2rem rgb(85, 26, 139);
+.navbar {
+	padding-top: 0.5em;
+	background-color: #fff;
+}
+
+.navbar ul {
 	padding: 0.2rem 0.4rem;
+	border-top: solid 1.2rem rgb(85, 26, 139);
 }
 
 .navbar li {
@@ -31,24 +66,31 @@ body {
 	padding: 0 0 0 2rem;
 }
 
-.inline.thought .contents {
+/*Thoughts*/
+
+.thought .title {
+	display: inline;
+	margin-bottom: 1.5rem;
+}
+
+.thought .tags {
+	float: right;
+	#margin: auto auto 0 auto;
+}
+
+.thought .tags :not(:last-child)::after {
+	content: ", ";
+}
+
+.thought .contents {
+	padding-top: 1rem;
+}
+
+.inline.thought:not(:last-child) .contents {
 	max-height: 20rem;
 	overflow: hidden;
 }
 
 .inline.thought {
 	margin-bottom: 3rem;
-}
-
-.thought h2 {
-	display: inline;
-}
-
-.thought .tags {
-	float: right;
-	margin: auto auto 0 auto;
-}
-
-.thought .tags :not(:last-child)::after {
-	content: ", ";
 }

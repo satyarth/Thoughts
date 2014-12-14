@@ -8,16 +8,16 @@ $def with (content)
 	<link href='http://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet' type='text/css'>
 </head>
 <body>
-	<div class="page-container">
-		<ul class="navbar">
+	<div class="page">
+		<div class="navbar"><ul>
 			<li><a href="/">home</a></li>
 			<li><a href="/taglist">taglist</a></li>
 			<li><a href="/archive">archive</a></li>
 			$for social in socials:
 				<li><a href="$social.link" target="_blank">$social.label</a></li>
 			<li class="right">Powered by <a href="http://www.github.com/Fedjmike/Thoughts" target="_blank">'Thoughts'</a></li>
-		</ul>
-		$:content
+		</ul></div>
+		<div class="content">$:content</div>
 	</div>
 </body>
 </html>
