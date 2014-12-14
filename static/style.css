@@ -24,6 +24,34 @@ h1:first-child, h2:first-child, h3:first-child, p:first-child {
 	margin-top: 0;
 }
 
+article ul {
+	list-style: none;
+	padding: 0;
+}
+
+article ul li:before {
+    content: "- ";
+    color: rgb(85, 26, 139)
+}
+
+article ul ul {
+	margin-left: 1rem;
+}
+
+article code {
+	font-family: Consolas, Inconsolata, monospace
+}
+
+article pre {
+	margin-left: 1rem;
+}
+
+article :not(pre) > code {
+	padding: 0 0.2rem;
+	background-color: rgba(85, 26, 139, 0.05);
+	white-space: nowrap;
+}
+
 /*Layout*/
 
 .page {
