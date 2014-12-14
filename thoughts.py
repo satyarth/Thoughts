@@ -84,7 +84,7 @@ class Thought:
 				pass
 					
 		self.marked_contents = markdown.markdown(self.contents,
-												 extensions=["markdown.extensions.codehilite", "markdown.extensions.def_list"],
+												 extensions=["markdown.extensions.codehilite", "markdown.extensions.def_list", "markdown.extensions.footnotes"],
 												 extension_configs={"markdown.extensions.codehilite": {"css_class": "code"}})
 	
 def tags_all():
