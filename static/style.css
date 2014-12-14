@@ -102,6 +102,10 @@ blockquote {
 	font-style: italic;
 }
 
+.footnote {
+	font-size: 0.8rem;
+}
+
 /*Layout*/
 
 .page {
