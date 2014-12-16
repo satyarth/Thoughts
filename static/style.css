@@ -165,7 +165,8 @@ blockquote {
 	#margin: auto auto 0 auto;
 }
 
-.thought .tags :not(:last-child)::after {
+.thought .tags :not(br) + ::before {
+	margin-left: -0.3rem;
 	content: ", ";
 }
 
