@@ -22,17 +22,18 @@ h1, h2, h3 {
 	margin: 1.5rem 0;
 }
 
-p {
-	margin: 1rem 0;
+:not(li) > p {
+	margin-bottom: 1rem;
 }
 
-h1:first-child, h2:first-child, h3:first-child, p:first-child {
-	margin-top: 0;
+p + ul {
+	margin-top: -0.7rem;
 }
 
 article ul {
 	list-style: none;
 	padding: 0;
+	margin-bottom: 1rem;
 }
 
 article ul li {
@@ -71,10 +72,13 @@ article code {
 	font-family: Consolas, Inconsolata, monospace
 }
 
+/*Block code*/
 article pre {
 	margin-left: 2rem;
+	margin-bottom: 1rem;
 }
 
+/*Inline code*/
 article :not(pre) > code {
 	padding: 0 0.2rem;
 	background-color: rgba(85, 26, 139, 0.05);
@@ -104,6 +108,12 @@ blockquote {
 
 .footnote {
 	font-size: 0.8rem;
+}
+
+hr {
+	margin-bottom: 5px;
+	border: 0;
+	border-top: 1px solid rgb(85, 26, 139);
 }
 
 /*Layout*/
@@ -162,7 +172,6 @@ blockquote {
 
 .thought .tags {
 	float: right;
-	#margin: auto auto 0 auto;
 }
 
 .thought .tags :not(br) + ::before {
