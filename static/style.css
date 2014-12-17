@@ -166,8 +166,16 @@ hr {
 }
 
 .thought .title {
-	display: inline;
-	margin-bottom: 1.5rem;
+	display: inline-block;
+	float: left;
+	margin: 0;
+}
+
+.thought .no.title {
+	width: 16px;
+	height: 16px;
+	margin-top: 2px;
+	background-color: rgb(85, 26, 139);
 }
 
 .thought .tags {

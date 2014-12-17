@@ -58,7 +58,7 @@ def thought_get(name):
 
 class Thought:
 	def __init__(self, name, str):
-		self.title = ""
+		self.title = None
 		self.tags = []
 		self.contents = str
 		#Remove extension
