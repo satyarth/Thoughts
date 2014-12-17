@@ -2,7 +2,7 @@ import web
 import markdown
 import simplejson
 
-import os
+import os, collections
 
 base_path = "./"
 thoughts_path = base_path + "thoughts/"
@@ -88,15 +88,11 @@ class Thought:
 												 extension_configs={"markdown.extensions.codehilite": {"css_class": "code"}})
 	
 def tags_all():
-	tags = {}
+	tags = collections.defaultdict(lambda: 0)
 	
 	for thought in thoughts_all():
 		for tag in thought.tags:
-			if tag in tags:
-				tags[tag] += 1
-				
-			else:
-				tags[tag] = 1
+			tags[tag] += 1
 	
 	return tags
 	
