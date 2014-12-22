@@ -1,8 +1,11 @@
 import web
 import markdown
-import simplejson
+import bleach
+from smartencoding import smart_unicode
 
 import os, collections
+
+#Basic config
 
 base_path = "./"
 thoughts_path = base_path + "thoughts/"
@@ -18,6 +21,8 @@ urls = (
     '/(.*)', 'ThoughtServer',
 )
 
+#App setup
+
 def notfound():
     return renderpage.notfound()
 
@@ -26,9 +31,36 @@ app.notfound = notfound
 
 application = app.wsgifunc()
 
+#Template renderers
+
 render = web.template.render(templates_path, globals=template_globals)
 renderpage = web.template.render(templates_path, globals=template_globals, base="index")
 
+#Markdown
+
+md_extensions = ["markdown.extensions.codehilite",
+				 "markdown.extensions.def_list",
+				 "markdown.extensions.footnotes",
+				 "markdown.extensions.meta"]
+markdowner = markdown.Markdown(md_extensions,
+							   extension_configs={"markdown.extensions.codehilite": {"css_class": "code"}},
+							   output_format="html5")
+
+
+#Bleacher
+
+tags = ["span", "br", "p", "div", "h1", "h2", "h3", "h4", "h5", "h6",
+		"a", "blockquote", "pre", "code",
+		"li", "ol", "ul", "dl", "dt", "dd",
+		"em", "sup", "hr", "acronym", "abbr"]
+attrs = {"*": ["class"],
+		 "a": ["href", "title"],
+		 "acronym": ["title"],
+		 "abbr": ["title"]}
+bleacher = lambda str: bleach.clean(str, tags, attrs)
+
+#
+							   
 def has_suffix(str, suffix):
     return str[-len(suffix):] == suffix
 
@@ -48,8 +80,8 @@ def thought_get(name):
 
     for filename in filenames:
         try:
-            with open(filename) as file:
-                return Thought(name, file.read())
+			with open(filename) as file:
+				return Thought(name, file)
 
         except IOError:
             pass
@@ -57,35 +89,26 @@ def thought_get(name):
     return None
 
 class Thought:
-	def __init__(self, name, str):
+	def __init__(self, name, file):
 		self.title = None
 		self.tags = []
-		self.contents = str
 		#Remove extension
 		self.name = name[:name.rfind(".")]
 		
-		str_split = str.split("\n", 1)
+		#Process the text
+		encoded = smart_unicode(file.read())
+		marked = markdowner.reset().convert(encoded)
+		self.contents = bleacher(marked)
 		
-		#Doesn't have a metadata / empty file
-		if str == "" or str[0] != "{" or len(str_split) == 1:
-			pass
-		
-		else:
-			try:
-				metadata = simplejson.loads(str_split[0])
-				self.contents = str_split[1]
+		#Import the relevant keys from the metadata into self
+		for key, join in [("title", True), ("tags", False)]:
+			if key in markdowner.Meta:
+				value = markdowner.Meta[key]
 				
-				#Import the relevant keys from the metadata into self
-				for key in ["title", "tags"]:
-					if key in metadata:
-						setattr(self, key, metadata[key])
-						
-			except simplejson.decoder.JSONDecodeError:
-				pass
-					
-		self.marked_contents = markdown.markdown(self.contents,
-												 extensions=["markdown.extensions.codehilite", "markdown.extensions.def_list", "markdown.extensions.footnotes"],
-												 extension_configs={"markdown.extensions.codehilite": {"css_class": "code"}})
+				if join:
+					value = "\n".join(value)
+				
+				setattr(self, key, value)
 	
 def tags_all():
 	tags = collections.defaultdict(lambda: 0)
