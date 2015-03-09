@@ -6,6 +6,7 @@
 
 body {
 	font-family: 'Merriweather', serif;
+	overflow-y: scroll
 }
 
 .thought h1, a {
