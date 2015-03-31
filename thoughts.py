@@ -52,7 +52,7 @@ markdowner = markdown.Markdown(md_extensions,
 tags = ["span", "br", "p", "div", "h1", "h2", "h3", "h4", "h5", "h6",
 		"a", "blockquote", "pre", "code",
 		"li", "ol", "ul", "dl", "dt", "dd",
-		"em", "sup", "hr", "acronym", "abbr"]
+		"strong", "em", "sup", "hr", "acronym", "abbr"]
 attrs = {"*": ["class"],
 		 "a": ["href", "title"],
 		 "acronym": ["title"],
