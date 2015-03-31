@@ -195,6 +195,11 @@ hr {
 .inline.thought:not(:last-child) .contents {
 	max-height: 20rem;
 	overflow: hidden;
+    transition: max-height 1s;
+}
+
+.inline.thought:not(:last-child) .contents:hover {
+    max-height: 100rem;
 }
 
 .inline.thought {
